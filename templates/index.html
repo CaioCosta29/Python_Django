@@ -20,8 +20,15 @@
             <img src="{% static '/assets/logo/Logo(2).png' %}" alt="Logo da Alura Space" />
             <div class="cabecalho__busca">
                 <div class="busca__fundo">
-                    <input class="busca__input" type="text" placeholder="O que você procura?">
-                    <img class="busca__icone" src="{% static '/assets/ícones/1x/search.png' %}" alt="ícone de search">
+
+                    <form action="{% url 'buscar_input' %}" method="get">
+                        <input class="busca__input" type="text" name="buscar_input" placeholder="O que você procura?">
+
+                        <button type="submit">
+                            <img class="busca__icone" src="{% static '/assets/ícones/1x/search.png' %}" alt="ícone de search">
+                        </button>
+                    </form>
+                    
                 </div>
             </div>
         </header>
@@ -56,9 +63,9 @@
                                 {% for foto in cards %}
                                     <li class="card">
                                         <a href="{% url 'imagem' foto.id %}">
-                                            <img class="card__imagem" src="{% static '/assets/imagens/galeria/' %}{{ foto.caminho_foto }}" alt="foto">
+                                            <img class="card__imagem" src="{{ foto.caminho_foto.url }}" alt="foto">
                                         </a>
-                                        <span class="card__tag">Estrelas</span>
+                                        <span class="card__tag">{{ foto.categoria }}</span>
                                         <div class="card__info">
                                             <p class="card__titulo">{{ foto.nome }}</p>
                                             <div class="card__texto">
